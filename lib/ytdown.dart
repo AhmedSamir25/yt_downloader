@@ -4,14 +4,6 @@ import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 class Ytdown {
   var yt = YoutubeExplode();
 
-  void ytFunc({required String videoUrl}) async {
-    var video = await yt.videos.get(videoUrl);
-    var title = video.title;
-    var author = video.author;
-    var duration = video.duration;
-    print('$title by $author, Duration: ${duration.toString()}');
-  }
-
   String get userDownloadPath {
     String? userProfilePath = Platform.environment['USERPROFILE'];
     String? userName = userProfilePath?.split('\\').last;
@@ -23,7 +15,7 @@ class Ytdown {
     return 'C:/Users/$userName/Downloads/';
   }
 
-  void ytDownloader({required String storage, required String videoCode}) async {
+  void videoMuxed({required String storage, required String videoCode}) async {
     var manifest = await yt.videos.streamsClient.getManifest(videoCode);
     var streamInfo = manifest.muxed.withHighestBitrate();
 
@@ -57,7 +49,7 @@ class Ytdown {
     print('\nDownload complete!');
   }
 
-  void highQu({required String videoCode, required String storage}) async {
+  void videoHighQu({required String videoCode, required String storage}) async {
     var manifest = await yt.videos.streamsClient.getManifest(videoCode);
     var streamInfo = manifest.video.withHighestBitrate();
     print(streamInfo);
